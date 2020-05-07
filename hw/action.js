@@ -19,13 +19,13 @@ randomArray = getRandomArray();
 console.log(randomArray);
 
 
-function SredneeGeometr(a){
-    let res=1;
-    a.forEach(item => res*=item);
+function sredneeGeometr(a){
+    let res = 1;
+    a.forEach(item => res *= item);
     return Math.pow(res, 1/a.length);
 }
 
-let resault = SredneeGeometr(randomArray);
+let resault = sredneeGeometr(randomArray);
 
 console.log(resault);
 
@@ -39,7 +39,7 @@ function RandomUsers(){
     {
         let index = getRandom(0,NAMES.length - 1);
         let user = {
-            id:(getRandom(0,50)+i),
+            id:(NAMES.length * 2 + i),
             name:NAMES[index],
             age:getRandom(10,100)
         }; 
@@ -51,20 +51,18 @@ function RandomUsers(){
 RandomUsers();
 console.log(users);
 
+
+//-------------------//
 let persent;
-
 function Stariki(useri){
-    let k=0;
-    for(let i=0; i<(NAMES.length/2)+5; i++){
-        if(useri[i].age>50){
-            k++;
-        }
-    }
-    return (k*100)/(NAMES.length/2+5);
-}
+    let kolVo;
+    kolVo = users.filter(useri => useri.age > 50);
 
+    return kolVo.length*100/useri.length;
+}
 persent = Stariki(users);
-console.log(persent);
+console.log(Math.floor(persent * 10) / 10);
+
 
 //---------------//
 
@@ -75,21 +73,18 @@ console.log(users);
 
 let arrName;
 
-function arrayName(){
-    let arr=[];
-    for(let i=0; i<(NAMES.length/2)+5; i++){
-        arr[i]= users[i].name;
-    }
+function arrayName(a){
+    let arr = a.map(elem => elem.name);
     return arr;
 }
 
-arrName = arrayName();
+arrName = arrayName(users);
 console.log(arrName);
 
 //-------------//
 
 function deliteUsers(){
-    let id = users[getRandom(0,(NAMES.length/2+5))];
+    let id = users[getRandom(0,users.length)];
     let index = users.indexOf(id);
     users.splice(index,1);
     console.log(id);
@@ -101,9 +96,16 @@ console.log(users);
 
 //------------------//
 
+function dateNow(){
+    let date = new Date();
+    let sec;
+    return sec = date.getSeconds()
+}
+let second = dateNow();
+
 function addUsers(){
     let user = {
-        id:(getRandom(0,50)+7),
+        id:getRandom(0,50) + second,
         name:'Летчик',
         age:getRandom(10,100)
     }; 
